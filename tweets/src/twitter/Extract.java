@@ -4,8 +4,13 @@
 package twitter;
 
 import java.time.Instant;
+import java.util.Comparator;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 /**
  * Extract consists of methods that extract information from a list of tweets.
@@ -25,13 +30,26 @@ public class Extract {
      *         every tweet in the list.
      */
     public static Timespan getTimespan(List<Tweet> tweets) {
-      Instant first,last;
-      first=tweets.get(0).getTimestamp();
-      last=tweets.get(tweets.size()-1).getTimestamp();
-      Timespan result=new Timespan(first,last);
-      return result;
+    	Instant first = null,last = null;
+    	if(!tweets.isEmpty()) {   		
+        	first=tweets.get(0).getTimestamp();
+        	last=tweets.get(tweets.size()-1).getTimestamp();
+        	Timespan result=new Timespan(first,last);
+        	return result;
+    	}
+    	else if(tweets.size()==1){
+    		first=tweets.get(0).getTimestamp();
+        	last=tweets.get(0).getTimestamp();
+        	Timespan result=new Timespan(first,last);
+        	return result;
+    	}
+    	else {
+    		return null;
+    	}
+    	
+    	
     }
-
+      
     /**
      * Get usernames mentioned in a list of tweets.
      * 
@@ -47,14 +65,13 @@ public class Extract {
      *         Twitter usernames are case-insensitive, and the returned set may
      *         include a username at most once.
      */
-    
-    
-     
-    
-    
-    
+   
     public static Set<String> getMentionedUsers(List<Tweet> tweets) {
-        throw new RuntimeException("not implemented");
+    	return null;
     }
-
+    
 }
+
+    
+
+
